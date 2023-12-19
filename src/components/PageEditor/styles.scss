@@ -26,8 +26,8 @@
   }
 
   pre {
-    background: #0D0D0D;
-    color: #FFF;
+    background: #0d0d0d;
+    color: #fff;
     font-family: 'JetBrainsMono', monospace;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
@@ -47,12 +47,12 @@
 
   blockquote {
     padding-left: 1rem;
-    border-left: 2px solid rgba(#0D0D0D, 0.1);
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
   }
 
   hr {
     border: none;
-    border-top: 2px solid rgba(#0D0D0D, 0.1);
+    border-top: 2px solid rgba(#0d0d0d, 0.1);
     margin: 2rem 0;
   }
 }
@@ -89,7 +89,7 @@
     .selectedCell:after {
       z-index: 2;
       position: absolute;
-      content: "";
+      content: '';
       left: 0;
       right: 0;
       top: 0;
@@ -120,7 +120,7 @@
   cursor: col-resize;
 }
 
-ul[data-type="taskList"] {
+ul[data-type='taskList'] {
   list-style: none;
 
   li {
@@ -138,7 +138,7 @@ ul[data-type="taskList"] {
     }
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     cursor: pointer;
   }
 
@@ -158,10 +158,10 @@ ul[data-type="taskList"] {
   margin-top: 1rem;
   display: flex;
   align-items: center;
-  color: #68CEF8;
+  color: #68cef8;
 
   &--warning {
-    color: #FB5151;
+    color: #fb5151;
   }
 
   &__graph {

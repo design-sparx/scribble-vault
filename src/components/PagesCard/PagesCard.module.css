@@ -8,9 +8,10 @@
     cursor: pointer;
     box-shadow: var(--mantine-shadow-xl);
 
-    .action, .pinAction {
+    .action,
+    .pinAction {
       visibility: visible;
-      opacity: 1
+      opacity: 1;
     }
   }
 }
@@ -19,7 +20,9 @@
   margin-bottom: var(--mantine-spacing-md);
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 0.2s ease-in-out;
+  transition:
+    visibility 0s,
+    opacity 0.2s ease-in-out;
 }
 
 .pinAction {
@@ -29,5 +32,7 @@
   margin: var(--mantine-spacing-xs);
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 0.2s ease-in-out;
+  transition:
+    visibility 0s,
+    opacity 0.2s ease-in-out;
 }

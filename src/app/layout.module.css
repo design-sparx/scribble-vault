@@ -1,0 +1,16 @@
+.body {
+}
+
+.main {
+  background-color: var(--mantine-color-gray-0);
+}
+
+.sidenav {
+  /*margin: var(--mantine-spacing-xs);*/
+  box-shadow: var(--mantine-shadow-lg);
+}
+
+.header {
+  margin: auto;
+  box-shadow: var(--mantine-shadow-lg);
+}

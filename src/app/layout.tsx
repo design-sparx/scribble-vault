@@ -15,6 +15,7 @@ import {
   Group,
   MantineProvider,
   NavLink,
+  Paper,
   ScrollArea,
   Text,
   TextInput,
@@ -41,6 +42,8 @@ import { UserButton } from '@/components/UserButton';
 import { Logo } from '@/components/Logo';
 import { DatesProvider } from '@mantine/dates';
 import { NavBtn } from '@/components/NavBtn';
+
+import classes from './layout.module.css';
 
 const ICON_SIZE = 18;
 
@@ -110,7 +113,7 @@ export default function RootLayout({
 
         <ColorSchemeScript />
       </head>
-      <body>
+      <body className={classes.body}>
         <MantineProvider theme={myTheme}>
           <DatesProvider settings={{ firstDayOfWeek: 0 }}>
             <AppShell
@@ -120,21 +123,20 @@ export default function RootLayout({
                 breakpoint: 'sm',
                 collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
               }}
-              padding="md"
-              layout="alt"
+              padding="lg"
+              layout="default"
               withBorder={false}
             >
-              <AppShell.Header>
-                <Group h="100%" px="md">
-                  {!desktopOpened && (
-                    <ActionIcon onClick={toggleDesktop} visibleFrom="sm">
-                      {desktopOpened ? (
-                        <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
-                      ) : (
-                        <IconLayoutSidebarRightCollapse size={ICON_SIZE} />
-                      )}
-                    </ActionIcon>
-                  )}
+              <AppShell.Header className={classes.header}>
+                <Flex h="100%" px="md" align="center">
+                  <Logo />
+                  <ActionIcon onClick={toggleDesktop} visibleFrom="sm">
+                    {desktopOpened ? (
+                      <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
+                    ) : (
+                      <IconLayoutSidebarRightCollapse size={ICON_SIZE} />
+                    )}
+                  </ActionIcon>
                   <ActionIcon onClick={toggleMobile} hiddenFrom="sm">
                     {mobileOpened ? (
                       <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
@@ -148,36 +150,20 @@ export default function RootLayout({
                     leftSection={<IconSearch size={ICON_SIZE} />}
                     placeholder="search"
                   />
-                </Group>
+                  <ActionIcon>
+                    <IconBell size={ICON_SIZE} />
+                  </ActionIcon>
+                </Flex>
               </AppShell.Header>
-              <AppShell.Navbar p="md">
+              <AppShell.Navbar px="md" className={classes.sidenav}>
                 <AppShell.Section>
-                  <Flex align="center" gap={4} pl="xs">
-                    <Logo />
-                    <Flex h="100%" gap="xs">
-                      <ActionIcon>
-                        <IconBell size={ICON_SIZE} />
-                      </ActionIcon>
-                      {desktopOpened && (
-                        <ActionIcon onClick={toggleDesktop} visibleFrom="sm">
-                          {desktopOpened ? (
-                            <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
-                          ) : (
-                            <IconLayoutSidebarRightCollapse size={ICON_SIZE} />
-                          )}
-                        </ActionIcon>
-                      )}
-                      <ActionIcon onClick={toggleMobile} hiddenFrom="sm">
-                        {mobileOpened ? (
-                          <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
-                        ) : (
-                          <IconLayoutSidebarRightCollapse size={ICON_SIZE} />
-                        )}
-                      </ActionIcon>
-                    </Flex>
-                  </Flex>
+                  <UserButton
+                    user={userData}
+                    error={userError}
+                    loading={userLoading}
+                  />
                 </AppShell.Section>
-                <AppShell.Section grow my="md" component={ScrollArea}>
+                <AppShell.Section grow component={ScrollArea}>
                   <Text
                     c="dimmed"
                     tt="uppercase"
@@ -246,15 +232,10 @@ export default function RootLayout({
                     leftSection={<IconTrash size={ICON_SIZE} />}
                   />
                 </AppShell.Section>
-                <AppShell.Section>
-                  <UserButton
-                    user={userData}
-                    error={userError}
-                    loading={userLoading}
-                  />
-                </AppShell.Section>
               </AppShell.Navbar>
-              <AppShell.Main>{children}</AppShell.Main>
+              <AppShell.Main className={classes.main}>
+                <Paper bg="none">{children}</Paper>
+              </AppShell.Main>
             </AppShell>
           </DatesProvider>
         </MantineProvider>

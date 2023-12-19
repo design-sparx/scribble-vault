@@ -25,12 +25,13 @@ import { ListItem } from '@tiptap/extension-list-item';
 import suggestions from './suggestions';
 import { MenuBar } from '@/components/PageEditor/MenuBar';
 import './styles.scss';
+import { Box, BoxProps } from '@mantine/core';
 
 type PageEditorProps = {
   title: string;
   description: string;
   content: string;
-};
+} & BoxProps;
 
 const ICON_SIZE = 18;
 
@@ -67,6 +68,7 @@ export const PageEditor = ({
   content,
   description,
   title,
+  ...others
 }: PageEditorProps) => {
   const editor = useEditor({
     extensions: [
@@ -133,9 +135,9 @@ export const PageEditor = ({
   }
 
   return (
-    <>
+    <Box {...others}>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
-    </>
+    </Box>
   );
 };

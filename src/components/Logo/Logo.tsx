@@ -9,7 +9,7 @@ export const Logo = ({ withLabel }: LogoProps) => {
   const isMobile = useMediaQuery('(max-width: 769px)');
 
   return (
-    <UnstyledButton w="100%" py="sm">
+    <UnstyledButton>
       <Flex
         component="div"
         align="center"

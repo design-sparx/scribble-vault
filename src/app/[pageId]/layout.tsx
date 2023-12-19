@@ -5,6 +5,7 @@ import {
   Avatar,
   Flex,
   Menu,
+  Paper,
   Text,
   UnstyledButton,
 } from '@mantine/core';
@@ -25,7 +26,7 @@ export default function PageLayout({
 
   return (
     <section>
-      <nav>
+      <Paper py="sm" px="md" shadow="md">
         <Flex align="center" justify="space-between">
           <Menu>
             <Target>
@@ -55,7 +56,7 @@ export default function PageLayout({
             </ActionIcon>
           </Flex>
         </Flex>
-      </nav>
+      </Paper>
       {children}
     </section>
   );

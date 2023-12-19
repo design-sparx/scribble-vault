@@ -3,8 +3,8 @@ import { usePageDetails } from '@/hooks';
 import {
   Badge,
   Box,
+  Divider,
   Flex,
-  Group,
   lighten,
   Paper,
   PaperProps,
@@ -12,7 +12,6 @@ import {
   Text,
 } from '@mantine/core';
 import { colourNameToHex } from '@/utils';
-import { DateView } from '@/components/DateView';
 import { IconAlarm, IconCalendarTime, IconFlag } from '@tabler/icons-react';
 import { PageEditor } from '@/components/PageEditor';
 import { DateTimePicker } from '@mantine/dates';
@@ -29,9 +28,9 @@ export default function PageDetailsPage({
   const parsedColor = colourNameToHex(pageData?.color || '');
 
   const PAPER_PROPS: PaperProps = {
-    bg: 'none',
+    bg: lighten(parsedColor, 0.9),
     p: 'md',
-    shadow: 'sm',
+    shadow: 'md',
     withBorder: true,
     classNames: { root: classes.card },
     style: {
@@ -46,18 +45,23 @@ export default function PageDetailsPage({
         <meta name="description" content={pageData?.description} />
       </>
       {pageData && (
-        <Box bg={lighten(parsedColor, 0.9)} className={classes.root}>
+        <Box className={classes.root}>
           <Stack>
             <Paper {...PAPER_PROPS}>
               <PageEditor
                 title={pageData.name}
                 description={pageData.description}
                 content={pageData.content}
+                py="md"
               />
-            </Paper>
 
-            <Paper {...PAPER_PROPS}>
-              <Stack>
+              <Divider
+                color={lighten(parsedColor, 0.5)}
+                label="Notes info"
+                labelPosition="left"
+              />
+
+              <Stack py="md">
                 <Flex justify="space-between">
                   <Flex gap="xs" wrap="wrap">
                     {pageData?.name.split(' ').map((n) => (
@@ -71,10 +75,14 @@ export default function PageDetailsPage({
                   </Badge>
                 </Flex>
               </Stack>
-            </Paper>
 
-            <Paper {...PAPER_PROPS}>
-              <Flex gap="sm" justify="space-between">
+              <Divider
+                color={lighten(parsedColor, 0.5)}
+                label="Dates"
+                labelPosition="left"
+              />
+
+              <Flex gap="sm" justify="space-between" py="md">
                 <DateTimePicker
                   label="Set reminder"
                   dropdownType="modal"

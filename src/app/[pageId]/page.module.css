@@ -1,0 +1,8 @@
+.root {
+  margin-top: var(--mantine-spacing-md);
+  padding: var(--mantine-spacing-lg);
+  border-radius: var(--mantine-radius-default);
+}
+
+.card {
+}

@@ -1,0 +1,33 @@
+.card {
+  position: relative;
+  padding: var(--mantine-spacing-md);
+  text-decoration: none;
+  border: 2px solid transparent;
+
+  @mixin hover {
+    cursor: pointer;
+    box-shadow: var(--mantine-shadow-xl);
+
+    .action, .pinAction {
+      visibility: visible;
+      opacity: 1
+    }
+  }
+}
+
+.action {
+  margin-bottom: var(--mantine-spacing-md);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s ease-in-out;
+}
+
+.pinAction {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: var(--mantine-spacing-xs);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s ease-in-out;
+}

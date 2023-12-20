@@ -4,8 +4,11 @@ import {
   ActionIcon,
   Avatar,
   Breadcrumbs,
+  Button,
+  ButtonProps,
   darken,
   Flex,
+  Group,
   Image,
   isLightColor,
   lighten,
@@ -16,9 +19,18 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import {
+  IconArchive,
   IconChevronRight,
+  IconDoorExit,
+  IconDots,
   IconDotsVertical,
+  IconEdit,
+  IconFileExport,
+  IconMessagePlus,
+  IconPackageImport,
   IconSelector,
+  IconTrash,
+  IconUsersPlus,
 } from '@tabler/icons-react';
 import { colourNameToHex } from '@/utils';
 import { useEffect, useState } from 'react';
@@ -26,10 +38,19 @@ import { IWorkspace } from '@/types';
 import _ from 'lodash';
 import Link from 'next/link';
 import { PATH_WORKSPACE } from '@/constants/routes';
+import { ChangeViewPopover } from '@/components/ChangeViewPopover';
+import { useDisclosure } from '@mantine/hooks';
+import { ShareModal } from '@/components/ShareModal';
+import { AddCommentModal } from '@/components/AddCommentModal';
+import { EditWorkspaceModal } from '@/components/EditWorkspaceModal';
 
 const { Target, Dropdown, Item, Divider } = Menu;
 
 const ICON_SIZE = 18;
+
+const BUTTON_PROPS: ButtonProps = {
+  variant: 'default',
+};
 
 export default function PageLayout({
   children,
@@ -40,6 +61,12 @@ export default function PageLayout({
 }) {
   const { pageData, pageError, pageLoading } = usePageDetails(params.pageId);
   const { workspacesData } = useWorkspaces();
+  const [shareOpened, { open: shareOpen, close: shareClose }] =
+    useDisclosure(false);
+  const [commentOpened, { open: commentOpen, close: commentClose }] =
+    useDisclosure(false);
+  const [editOpened, { open: editOpen, close: editClose }] =
+    useDisclosure(false);
   const [workspace, setWorkspace] = useState<IWorkspace>();
   const parsedColor = colourNameToHex(pageData?.color || '');
 
@@ -91,25 +118,55 @@ export default function PageLayout({
           <Breadcrumbs separator={<IconChevronRight size={18} />}>
             {items}
           </Breadcrumbs>
-          <Flex align="center" gap="sm">
-            <UnstyledButton>
-              <Flex align="center" gap="xs">
-                <Text>Share</Text>
-                <Avatar.Group>
-                  <Avatar src="image.png" />
-                  <Avatar src="image.png" />
-                  <Avatar src="image.png" />
-                  <Avatar>+5</Avatar>
-                </Avatar.Group>
-              </Flex>
-            </UnstyledButton>
-            <ActionIcon>
-              <IconDotsVertical size={ICON_SIZE} />
-            </ActionIcon>
+          <Flex align="center" gap="xs">
+            <Button
+              leftSection={<IconUsersPlus size={ICON_SIZE} />}
+              onClick={shareOpen}
+              {...BUTTON_PROPS}
+            >
+              Share
+            </Button>
+            <ChangeViewPopover buttonProps={BUTTON_PROPS} />
+            <Button
+              leftSection={<IconMessagePlus size={ICON_SIZE} />}
+              onClick={commentOpen}
+              {...BUTTON_PROPS}
+            >
+              Comment
+            </Button>
+            <Menu position="bottom-end">
+              <Target>
+                <ActionIcon>
+                  <IconDots size={ICON_SIZE} />
+                </ActionIcon>
+              </Target>
+              <Dropdown>
+                <Item
+                  leftSection={<IconEdit size={ICON_SIZE} />}
+                  onClick={editOpen}
+                >
+                  Edit
+                </Item>
+                <Item leftSection={<IconTrash size={ICON_SIZE} />}>Delete</Item>
+              </Dropdown>
+            </Menu>
           </Flex>
         </Flex>
       </Paper>
       {children}
+      <ShareModal opened={shareOpened} onClose={shareClose} />
+      <AddCommentModal
+        opened={commentOpened}
+        onClose={commentClose}
+        title={
+          <Group>
+            <Image src={pageData?.icon} alt={pageData?.name} h={24} w={24} />
+            <Text>{pageData?.name}</Text>
+          </Group>
+        }
+        size="lg"
+      />
+      <EditWorkspaceModal opened={editOpened} onClose={editClose} />
     </section>
   );
 }

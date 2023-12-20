@@ -17,6 +17,7 @@
     "@mantine/core": "^7.3.2",
     "@mantine/dates": "^7.3.2",
     "@mantine/dropzone": "^7.3.2",
+    "@mantine/form": "^7.3.2",
     "@mantine/hooks": "^7.3.2",
     "@mantine/modals": "^7.3.2",
     "@mantine/tiptap": "^7.3.2",
@@ -54,11 +55,13 @@
     "@tiptap/suggestion": "^2.1.13",
     "dayjs": "^1.11.10",
     "lodash": "^4.17.21",
+    "mantine-form-zod-resolver": "^1.1.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "swr": "^2.2.4",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",

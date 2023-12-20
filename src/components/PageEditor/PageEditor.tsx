@@ -25,15 +25,16 @@ import { ListItem } from '@tiptap/extension-list-item';
 import suggestions from './suggestions';
 import { MenuBar } from '@/components/PageEditor/MenuBar';
 import './styles.scss';
-import { Box, BoxProps } from '@mantine/core';
-
-type PageEditorProps = {
-  title: string;
-  description: string;
-  content: string;
-} & BoxProps;
-
-const ICON_SIZE = 18;
+import {
+  Box,
+  BoxProps,
+  darken,
+  isLightColor,
+  lighten,
+  Paper,
+  PaperProps,
+} from '@mantine/core';
+import classes from '@/app/page/[pageId]/page.module.css';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
@@ -63,6 +64,12 @@ const CustomTableCell = TableCell.extend({
     };
   },
 });
+
+type PageEditorProps = {
+  title?: string;
+  description?: string;
+  content?: string;
+} & PaperProps;
 
 export const PageEditor = ({
   content,
@@ -115,7 +122,8 @@ export const PageEditor = ({
       Text,
       Underline,
     ],
-    content: `
+    content: title
+      ? `
       <div>
         <h2>
           ${title}
@@ -127,7 +135,11 @@ export const PageEditor = ({
         <h4>Brief</h4>
         <p>${content}</p>
       </div>
-    `,
+    `
+      : `<div>
+          <h2>write your content here</h2>
+          <br>
+        </div>`,
   });
 
   if (!editor) {
@@ -135,9 +147,9 @@ export const PageEditor = ({
   }
 
   return (
-    <Box {...others}>
+    <Paper {...others}>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
-    </Box>
+    </Paper>
   );
 };

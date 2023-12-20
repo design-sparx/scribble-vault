@@ -8,6 +8,7 @@ import {
   Menu,
   MenuProps,
   Paper,
+  Tooltip,
 } from '@mantine/core';
 import {
   IconBlockquote,
@@ -561,97 +562,108 @@ export const MenuBar = ({ editor }: MenuBarProps) => {
           tippyOptions={{ duration: 100 }}
           editor={editor}
         >
-          <Button.Group orientation="vertical">
-            <Button
-              onClick={() => editor.chain().focus().setParagraph()}
-              className={editor.isActive('text') ? 'is-active' : ''}
-              leftSection={<IconLetterCase size={ICON_SIZE} />}
-            >
-              Text
-            </Button>
-            <Button
-              onClick={() => editor.chain().focus().toggleTaskList().run()}
-              className={editor.isActive('taskList') ? 'is-active' : ''}
-              leftSection={<IconListDetails size={ICON_SIZE} />}
-            >
-              To-do list
-            </Button>
-            <Button
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 1 }).run()
-              }
-              className={editor.isActive('heading1') ? 'is-active' : ''}
-              leftSection={<IconH1 size={ICON_SIZE} />}
-            >
-              Heading 1
-            </Button>
-            <Button
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 2 }).run()
-              }
-              className={editor.isActive('heading2') ? 'is-active' : ''}
-              leftSection={<IconH2 size={ICON_SIZE} />}
-            >
-              Heading 2
-            </Button>
-            <Button
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 3 }).run()
-              }
-              className={editor.isActive('heading3') ? 'is-active' : ''}
-              leftSection={<IconH3 size={ICON_SIZE} />}
-            >
-              Heading 3
-            </Button>
-            <Button
-              onClick={() =>
-                editor.commands.insertTable({
-                  rows: 3,
-                  cols: 3,
-                  withHeaderRow: true,
-                })
-              }
-              className={editor.isActive('table') ? 'is-active' : ''}
-              leftSection={<IconTable size={ICON_SIZE} />}
-            >
-              Table
-            </Button>
-            <Button
-              onClick={() => editor.chain().focus().toggleBulletList().run()}
-              className={editor.isActive('bulletList') ? 'is-active' : ''}
-              leftSection={<IconList size={ICON_SIZE} />}
-            >
-              Bullet List
-            </Button>
-            <Button
-              onClick={() => editor.chain().focus().toggleOrderedList().run()}
-              className={editor.isActive('orderedList') ? 'is-active' : ''}
-              leftSection={<IconListNumbers size={ICON_SIZE} />}
-            >
-              Numbered List
-            </Button>
-            <Button
-              onClick={() => editor.chain().focus().setBlockquote().run()}
-              className={editor.isActive('blockQuote') ? 'is-active' : ''}
-              leftSection={<IconBlockquote size={ICON_SIZE} />}
-            >
-              Quote
-            </Button>
-            <Button
-              onClick={() => editor.chain().focus().setHardBreak().run()}
-              className={editor.isActive('break') ? 'is-active' : ''}
-              leftSection={<IconPageBreak size={ICON_SIZE} />}
-            >
-              Break
-            </Button>
-            <Button
-              onClick={() => editor.chain().focus().setHorizontalRule().run()}
-              className={editor.isActive('horizontalRule') ? 'is-active' : ''}
-              leftSection={<IconSeparatorHorizontal size={ICON_SIZE} />}
-            >
-              Divider
-            </Button>
-          </Button.Group>
+          <ActionIcon.Group>
+            <Tooltip label="Paragraph">
+              <ActionIcon
+                onClick={() => editor.chain().focus().setParagraph()}
+                className={editor.isActive('text') ? 'is-active' : ''}
+              >
+                <IconLetterCase size={ICON_SIZE} />{' '}
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="To-do list">
+              <ActionIcon
+                onClick={() => editor.chain().focus().toggleTaskList().run()}
+                className={editor.isActive('taskList') ? 'is-active' : ''}
+              >
+                <IconListDetails size={ICON_SIZE} />{' '}
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Heading 1">
+              <ActionIcon
+                onClick={() =>
+                  editor.chain().focus().toggleHeading({ level: 1 }).run()
+                }
+                className={editor.isActive('heading1') ? 'is-active' : ''}
+              >
+                <IconH1 size={ICON_SIZE} />{' '}
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Heading 2">
+              <ActionIcon
+                onClick={() =>
+                  editor.chain().focus().toggleHeading({ level: 2 }).run()
+                }
+                className={editor.isActive('heading2') ? 'is-active' : ''}
+              >
+                <IconH2 size={ICON_SIZE} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Heading 3">
+              <ActionIcon
+                onClick={() =>
+                  editor.chain().focus().toggleHeading({ level: 3 }).run()
+                }
+                className={editor.isActive('heading3') ? 'is-active' : ''}
+              >
+                <IconH3 size={ICON_SIZE} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Table">
+              <ActionIcon
+                onClick={() =>
+                  editor.commands.insertTable({
+                    rows: 3,
+                    cols: 3,
+                    withHeaderRow: true,
+                  })
+                }
+                className={editor.isActive('table') ? 'is-active' : ''}
+              >
+                <IconTable size={ICON_SIZE} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Bullet list">
+              <ActionIcon
+                onClick={() => editor.chain().focus().toggleBulletList().run()}
+                className={editor.isActive('bulletList') ? 'is-active' : ''}
+              >
+                <IconList size={ICON_SIZE} />{' '}
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Ordered list">
+              <ActionIcon
+                onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                className={editor.isActive('orderedList') ? 'is-active' : ''}
+              >
+                <IconListNumbers size={ICON_SIZE} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Quote">
+              <ActionIcon
+                onClick={() => editor.chain().focus().setBlockquote().run()}
+                className={editor.isActive('blockQuote') ? 'is-active' : ''}
+              >
+                <IconBlockquote size={ICON_SIZE} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Break">
+              <ActionIcon
+                onClick={() => editor.chain().focus().setHardBreak().run()}
+                className={editor.isActive('break') ? 'is-active' : ''}
+              >
+                <IconPageBreak size={ICON_SIZE} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Horizontail rule">
+              <ActionIcon
+                onClick={() => editor.chain().focus().setHorizontalRule().run()}
+                className={editor.isActive('horizontalRule') ? 'is-active' : ''}
+              >
+                <IconSeparatorHorizontal size={ICON_SIZE} />
+              </ActionIcon>
+            </Tooltip>
+          </ActionIcon.Group>
         </FloatingMenu>
       )}
     </>

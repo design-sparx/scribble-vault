@@ -1,8 +1,11 @@
 import {
   ActionIcon,
+  Button,
   createTheme,
   Loader,
   MantineColorsTuple,
+  Menu,
+  Popover,
 } from '@mantine/core';
 
 const brightOrangeColor: MantineColorsTuple = [
@@ -31,12 +34,26 @@ export const myTheme = createTheme({
   components: {
     ActionIcon: ActionIcon.extend({
       defaultProps: {
-        variant: 'subtle',
+        variant: 'default',
+        size: 'lg',
       },
     }),
+    Button: Button.extend({ defaultProps: { variant: 'default' } }),
     Loader: Loader.extend({
       defaultProps: {
         type: 'dots',
+      },
+    }),
+    Menu: Menu.extend({
+      defaultProps: {
+        shadow: 'lg',
+        width: 200,
+      },
+    }),
+    Popover: Popover.extend({
+      defaultProps: {
+        shadow: 'lg',
+        width: 200,
       },
     }),
   },

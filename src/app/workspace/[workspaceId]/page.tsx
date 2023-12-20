@@ -9,7 +9,7 @@ export default function WorkspaceDetails({
   params: { workspaceId: string };
 }) {
   const { size, setSize, isReachingEnd, pages, isLoadingMore, error } =
-    usePaginatePages(24, { workspace_id: params.workspaceId });
+    usePaginatePages(12, { workspace_id: params.workspaceId });
 
   return (
     <Box component={Stack}>

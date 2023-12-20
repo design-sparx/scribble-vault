@@ -75,7 +75,7 @@ export const PagesCard = (props: NotesCardProps) => {
             .split(' ')
             .slice(0, 2)
             .map((n) => (
-              <Badge key={n} variant="outline">
+              <Badge key={n} variant="outline" color="dark.8">
                 {n}
               </Badge>
             ))}

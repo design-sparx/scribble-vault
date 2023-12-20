@@ -9,6 +9,7 @@ const ROOT_WORKSPACE = '/workspace';
 export const PATH_PAGE = {
   root: ROOT_PAGE,
   details: (id: string) => path(ROOT_PAGE, `/${id}`),
+  new: path(ROOT_PAGE, '/new'),
 };
 
 export const PATH_WORKSPACE = {

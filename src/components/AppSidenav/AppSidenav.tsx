@@ -10,11 +10,13 @@ import {
 import { UserButton } from '@/components/UserButton';
 import { PATH_PAGE } from '@/constants/routes';
 import {
+  IconCircleFilled,
   IconCirclePlus,
   IconCirclePlus2,
   IconPackageImport,
   IconPlus,
   IconRoute,
+  IconSquareRoundedPlusFilled,
   IconTemplate,
   IconTrash,
 } from '@tabler/icons-react';
@@ -64,12 +66,13 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
       </AppShell.Section>
       <NavLink
         label="Add page"
-        leftSection={<IconCirclePlus size={ICON_SIZE} />}
+        leftSection={<IconSquareRoundedPlusFilled size={ICON_SIZE} />}
         className={classes.link}
+        href={PATH_PAGE.new}
       />
       <AppShell.Section grow component={ScrollArea}>
         <AppShell.Section mb="md">
-          <Text tt="capitalize" size="sm" py="sm" fw={600}>
+          <Text tt="capitalize" size="md" py="sm" fw={700}>
             Workspaces
           </Text>
           {navWorkspaces?.map((navWorkspace) => (
@@ -102,7 +105,7 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
           ))}
         </AppShell.Section>
         <AppShell.Section>
-          <Text tt="capitalize" size="sm" py="sm" fw={600}>
+          <Text tt="capitalize" size="md" py="sm" fw={700}>
             Quick actions
           </Text>
           <NavLink

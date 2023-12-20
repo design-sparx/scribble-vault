@@ -1,0 +1,18 @@
+.linkHeader {
+  border-radius: var(--mantine-radius-default);
+}
+
+.linkChildren {
+  background-color: var(--mantine-primary-color-0);
+  border-radius: var(--mantine-radius-default);
+  transition: all 0.2s ease-in-out;
+}
+
+.link {
+  border-radius: var(--mantine-radius-default);
+
+  @mixin hover {
+    background-color: var(--mantine-primary-color-0);
+    transition: all 0.2s ease-in-out;
+  }
+}

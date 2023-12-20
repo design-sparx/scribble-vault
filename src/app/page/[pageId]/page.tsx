@@ -3,8 +3,10 @@ import { usePageDetails } from '@/hooks';
 import {
   Badge,
   Box,
+  darken,
   Divider,
   Flex,
+  isLightColor,
   lighten,
   Paper,
   PaperProps,
@@ -29,12 +31,15 @@ export default function PageDetailsPage({
 
   const PAPER_PROPS: PaperProps = {
     bg: lighten(parsedColor, 0.9),
-    p: 'md',
+    py: 0,
+    px: 'md',
     shadow: 'md',
     withBorder: true,
     classNames: { root: classes.card },
     style: {
-      borderColor: lighten(parsedColor, 0.6),
+      borderColor: isLightColor(parsedColor)
+        ? darken(parsedColor, 0.3)
+        : lighten(parsedColor, 0.6),
     },
   };
 
@@ -52,11 +57,15 @@ export default function PageDetailsPage({
                 title={pageData.name}
                 description={pageData.description}
                 content={pageData.content}
-                py="md"
+                pb="md"
               />
 
               <Divider
-                color={lighten(parsedColor, 0.5)}
+                color={
+                  isLightColor(parsedColor)
+                    ? darken(parsedColor, 0.3)
+                    : lighten(parsedColor, 0.5)
+                }
                 label="Notes info"
                 labelPosition="left"
               />
@@ -77,7 +86,11 @@ export default function PageDetailsPage({
               </Stack>
 
               <Divider
-                color={lighten(parsedColor, 0.5)}
+                color={
+                  isLightColor(parsedColor)
+                    ? darken(parsedColor, 0.3)
+                    : lighten(parsedColor, 0.5)
+                }
                 label="Dates"
                 labelPosition="left"
               />

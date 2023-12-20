@@ -1,4 +1,11 @@
-import { UnstyledButton, Group, Avatar, Text, rem } from '@mantine/core';
+import {
+  UnstyledButton,
+  Group,
+  Avatar,
+  Text,
+  rem,
+  UnstyledButtonProps,
+} from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
 import { IUser } from '@/types';
 import classes from './UserButton.module.css';
@@ -8,16 +15,13 @@ type UserButtonProps = {
   loading: boolean;
   error: any;
   wIcon?: boolean;
-};
+} & UnstyledButtonProps;
 
-export const UserButton = ({
-  user,
-  loading,
-  error,
-  wIcon,
-}: UserButtonProps) => {
+export const UserButton = (props: UserButtonProps) => {
+  const { user, loading, error, wIcon, ...others } = props;
+
   return (
-    <UnstyledButton className={classes.user}>
+    <UnstyledButton className={classes.user} {...others}>
       <Group>
         <Avatar src={user?.avatar} radius="xl" />
 

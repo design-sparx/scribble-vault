@@ -2,15 +2,15 @@
 }
 
 .main {
-  background-color: var(--mantine-color-gray-0);
+  background-color: var(--mantine-color-white);
 }
 
 .sidenav {
   /*margin: var(--mantine-spacing-xs);*/
-  box-shadow: var(--mantine-shadow-lg);
+  /*box-shadow: var(--mantine-shadow-lg);*/
 }
 
 .header {
   margin: auto;
-  box-shadow: var(--mantine-shadow-lg);
+  /*box-shadow: var(--mantine-shadow-lg);*/
 }

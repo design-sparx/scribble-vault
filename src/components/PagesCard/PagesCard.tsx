@@ -4,6 +4,7 @@ import {
   Badge,
   darken,
   Flex,
+  isLightColor,
   lighten,
   Paper,
   PaperProps,
@@ -24,6 +25,7 @@ import {
   IconUserPlus,
 } from '@tabler/icons-react';
 import Link from 'next/link';
+import { PATH_PAGE } from '@/constants/routes';
 
 type NotesCardProps = {
   note: IPage;
@@ -44,17 +46,20 @@ export const PagesCard = (props: NotesCardProps) => {
   } = props;
   const parsedColor = colourNameToHex(color);
 
+  const PAPER_PROPS: PaperProps = {
+    bg: lighten(parsedColor, 0.9),
+    withBorder: true,
+    className: classes.card,
+    style: {
+      height: '100%',
+      borderColor: isLightColor(parsedColor)
+        ? darken(parsedColor, 0.3)
+        : lighten(parsedColor, 0.7),
+    },
+  };
+
   return (
-    <Paper
-      component={Link}
-      href={`/${id}`}
-      className={classes.card}
-      bg={lighten(parsedColor, 0.9)}
-      c="black"
-      style={{
-        height: '100%',
-      }}
-    >
+    <Paper component={Link} href={PATH_PAGE.details(id)} {...PAPER_PROPS}>
       <ActionIcon className={classes.pinAction}>
         <IconPin size={ICON_SIZE} />
       </ActionIcon>

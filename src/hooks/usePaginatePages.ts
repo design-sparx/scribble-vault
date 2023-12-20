@@ -3,7 +3,10 @@ import { BASEURL } from '@/constants';
 import { fetcher } from '@/utils';
 import { IPage } from '@/types';
 
-export const usePaginatePages = (limit?: number) => {
+export const usePaginatePages = (
+  limit?: number,
+  filters?: { workspace_id: string }
+) => {
   const url = BASEURL + '/pages';
   const PAGE_LIMIT = limit || 5;
 
@@ -11,8 +14,12 @@ export const usePaginatePages = (limit?: number) => {
     throw new Error('Url is required');
   }
 
+  let filter: string;
+
+  filters && (filter = `&workspace_id=${filters.workspace_id}`);
+
   const { data, error, size, setSize } = useSWRInfinite(
-    (index) => `${url}?_page=${index + 1}&_limit=${PAGE_LIMIT}`,
+    (index) => `${url}?_page=${index + 1}` + filter + `&_limit=${PAGE_LIMIT}`,
     fetcher
   );
 

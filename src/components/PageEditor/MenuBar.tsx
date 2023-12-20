@@ -30,6 +30,7 @@ import {
   IconSubscript,
   IconSuperscript,
   IconTable,
+  IconTrash,
   IconUnderline,
 } from '@tabler/icons-react';
 import './menubar.scss';
@@ -75,7 +76,7 @@ const MENU_PROPS: MenuProps = {
 };
 
 const SUB_MENU_PROPS: MenuProps = {
-  position: 'right',
+  position: 'right-start',
   withArrow: true,
   width: 300,
   trigger: 'hover',
@@ -538,6 +539,15 @@ export const MenuBar = ({ editor }: MenuBarProps) => {
                       </Item>
                     </Dropdown>
                   </Menu>
+                  <Item
+                    leftSection={<IconTrash size={ICON_SIZE} />}
+                    onClick={() =>
+                      editor.chain().focus().deleteSelection().run()
+                    }
+                    c="red"
+                  >
+                    Delete
+                  </Item>
                 </Dropdown>
               </Menu>
             </ActionIcon.Group>

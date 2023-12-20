@@ -4,9 +4,17 @@
   text-decoration: none;
   border: 2px solid transparent;
 
+  @mixin light {
+    color: var(--mantine-color-black);
+  }
+
+  @mixin dark {
+    color: var(--mantine-color-white);
+  }
+
   @mixin hover {
     cursor: pointer;
-    box-shadow: var(--mantine-shadow-xl);
+    border-color: var(--mantine-color-black) !important;
 
     .action,
     .pinAction {

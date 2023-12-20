@@ -1,4 +1,9 @@
-import { ActionIcon, createTheme, MantineColorsTuple } from '@mantine/core';
+import {
+  ActionIcon,
+  createTheme,
+  Loader,
+  MantineColorsTuple,
+} from '@mantine/core';
 
 const brightOrangeColor: MantineColorsTuple = [
   '#fff1dc',
@@ -19,7 +24,7 @@ export const myTheme = createTheme({
   colors: {
     'bright-orange': brightOrangeColor,
   },
-  focusRing: 'always',
+  focusRing: 'auto',
   defaultRadius: 'lg',
   fontFamily: 'Open Sans, sans-serif',
   headings: { fontFamily: 'Open Sans, sans-serif' },
@@ -27,6 +32,11 @@ export const myTheme = createTheme({
     ActionIcon: ActionIcon.extend({
       defaultProps: {
         variant: 'subtle',
+      },
+    }),
+    Loader: Loader.extend({
+      defaultProps: {
+        type: 'dots',
       },
     }),
   },

@@ -1,15 +1,17 @@
 'use client';
-import { usePageDetails } from '@/hooks';
+import { useWorkspaceDetails } from '@/hooks';
 import {
   ActionIcon,
   Avatar,
   Flex,
+  Image,
   Menu,
   Paper,
+  PaperProps,
   Text,
   UnstyledButton,
 } from '@mantine/core';
-import { IconDotsVertical, IconSelector } from '@tabler/icons-react';
+import { IconDotsVertical } from '@tabler/icons-react';
 
 const { Target, Dropdown, Item, Divider } = Menu;
 
@@ -20,25 +22,33 @@ export default function PageLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { pageId: string };
+  params: { workspaceId: string };
 }) {
-  const { pageData, pageError, pageLoading } = usePageDetails(params.pageId);
+  const { workspaceData, workspaceError, workspaceLoading } =
+    useWorkspaceDetails(params.workspaceId);
+
+  const PAPER_PROPS: PaperProps = {
+    px: 'md',
+    py: 'sm',
+    shadow: 'sm',
+    withBorder: true,
+  };
 
   return (
     <section>
-      <Paper py="sm" px="md" shadow="md">
+      <Paper {...PAPER_PROPS}>
         <Flex align="center" justify="space-between">
-          <Menu>
-            <Target>
-              <UnstyledButton>
-                <Flex align="center" gap="sm">
-                  <Avatar src={pageData?.icon} size="sm" />
-                  <Text>{pageData?.name}</Text>
-                  <IconSelector size={ICON_SIZE} />
-                </Flex>
-              </UnstyledButton>
-            </Target>
-          </Menu>
+          <Flex gap="xs" align="center">
+            <Image
+              src={workspaceData?.icon}
+              alt={workspaceData?.name}
+              h={18}
+              w={18}
+            />
+            <Text fz="md" tt="capitalize">
+              {workspaceData?.name}
+            </Text>
+          </Flex>
           <Flex align="center" gap="sm">
             <UnstyledButton>
               <Flex align="center" gap="xs">

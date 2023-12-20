@@ -5,46 +5,20 @@
 import '@mantine/core/styles.css';
 import '@mantine/tiptap/styles.css';
 import '@mantine/dates/styles.css';
+import '@mantine/spotlight/styles.css';
 
 import {
-  ActionIcon,
   AppShell,
-  Avatar,
   ColorSchemeScript,
-  Flex,
-  Group,
   MantineProvider,
-  NavLink,
   Paper,
-  ScrollArea,
-  Text,
-  TextInput,
 } from '@mantine/core';
 import { myTheme } from '@/theme';
-import {
-  IconBell,
-  IconLayoutSidebarLeftCollapse,
-  IconLayoutSidebarRightCollapse,
-  IconPackageImport,
-  IconPlus,
-  IconRoute,
-  IconSearch,
-  IconTemplate,
-  IconTrash,
-} from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { usePages, useUser, useWorkspaces } from '@/hooks';
-import { useEffect, useState } from 'react';
-import { IPage, IWorkspace } from '@/types';
-import _ from 'lodash';
 import { inter } from '@/app/fonts';
-import { UserButton } from '@/components/UserButton';
-import { Logo } from '@/components/Logo';
 import { DatesProvider } from '@mantine/dates';
-import { NavBtn } from '@/components/NavBtn';
 
 import classes from './layout.module.css';
-import { PATH_PAGE } from '@/constants/routes';
 import { AppSidenav } from '@/components/AppSidenav';
 import { AppHeader } from '@/components/AppHeader';
 

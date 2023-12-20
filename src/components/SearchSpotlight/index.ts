@@ -1,0 +1,1 @@
+export { SearchSpotlight } from './SearchSpotlight';

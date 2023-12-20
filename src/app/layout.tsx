@@ -110,7 +110,7 @@ export default function RootLayout({
                   toggleDesktop={toggleDesktop}
                 />
               </AppShell.Header>
-              <AppShell.Navbar px="md" className={classes.sidenav}>
+              <AppShell.Navbar p="md" className={classes.sidenav}>
                 <AppSidenav />
               </AppShell.Navbar>
               <AppShell.Main className={classes.main}>

@@ -69,7 +69,7 @@ type PageEditorProps = {
   title?: string;
   description?: string;
   content?: string;
-} & PaperProps;
+} & BoxProps;
 
 export const PageEditor = ({
   content,
@@ -147,9 +147,9 @@ export const PageEditor = ({
   }
 
   return (
-    <Paper {...others}>
+    <Box {...others}>
       <MenuBar editor={editor} />
       <EditorContent editor={editor} />
-    </Paper>
+    </Box>
   );
 };

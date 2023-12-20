@@ -13,7 +13,9 @@ export default function NewPage() {
     <>
       <title>New page</title>
       <Stack mt="md" align="flex-start">
-        <PageEditor {...PAPER_PROPS} w="100%" />
+        <Paper {...PAPER_PROPS} w="100%">
+          <PageEditor />
+        </Paper>
         <Flex gap="xs" mt="md">
           <Button variant="filled" leftSection={<IconDeviceFloppy size={18} />}>
             Save

@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import {
   AppShell,
@@ -24,6 +25,7 @@ import { usePages, useUser, useWorkspaces } from '@/hooks';
 import classes from './AppSidenav.module.css';
 import _ from 'lodash';
 import { IPage, IWorkspace } from '@/types';
+import { usePathname } from 'next/navigation';
 
 const ICON_SIZE = 18;
 
@@ -39,6 +41,7 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
   const [navWorkspaces, setNavWorkspaces] = useState<
     INavWorkspace[] | undefined
   >();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (pagesData) {
@@ -59,6 +62,12 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
     }
   }, [workspacesData, pagesData]);
 
+  console.log('pathname', pathname);
+
+  console.log('path', pathname.split('/')[pathname.split('/').length - 1]);
+
+  console.log('nav workspaces', navWorkspaces);
+
   return (
     <>
       <AppShell.Section>
@@ -67,8 +76,9 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
       <NavLink
         label="Add page"
         leftSection={<IconSquareRoundedPlusFilled size={ICON_SIZE} />}
-        className={classes.link}
+        className={classes.linkNew}
         href={PATH_PAGE.new}
+        active={PATH_PAGE.new === pathname}
       />
       <AppShell.Section grow component={ScrollArea}>
         <AppShell.Section mb="md">
@@ -82,11 +92,19 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
               leftSection={
                 <Avatar src={navWorkspace.workspace?.icon} size={ICON_SIZE} />
               }
+              active={
+                navWorkspace.workspace?.id ===
+                _.find(navWorkspace.pages, [
+                  'id',
+                  pathname.split('/')[pathname.split('/').length - 1],
+                ])?.workspace_id
+              }
               className={classes.linkHeader}
               classNames={{
                 root: classes.link,
                 children: classes.linkChildren,
               }}
+              childrenOffset={0}
             >
               {navWorkspace.pages?.slice(0, 5)?.map((navPage) => (
                 <NavLink
@@ -99,6 +117,7 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
                   leftSection={<Avatar src={navPage.icon} size={ICON_SIZE} />}
                   href={PATH_PAGE.details(navPage.id)}
                   className={classes.link}
+                  active={PATH_PAGE.details(navPage.id) === pathname}
                 />
               ))}
             </NavLink>

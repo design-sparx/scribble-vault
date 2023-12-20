@@ -1,5 +1,6 @@
 import { Flex, Image, rem, Text, UnstyledButton } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import Link from 'next/link';
 
 type LogoProps = {
   withLabel?: boolean;
@@ -9,7 +10,7 @@ export const Logo = ({ withLabel }: LogoProps) => {
   const isMobile = useMediaQuery('(max-width: 769px)');
 
   return (
-    <UnstyledButton>
+    <UnstyledButton component={Link} href="/">
       <Flex
         component="div"
         align="center"

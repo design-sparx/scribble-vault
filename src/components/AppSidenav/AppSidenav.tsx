@@ -62,12 +62,6 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
     }
   }, [workspacesData, pagesData]);
 
-  console.log('pathname', pathname);
-
-  console.log('path', pathname.split('/')[pathname.split('/').length - 1]);
-
-  console.log('nav workspaces', navWorkspaces);
-
   return (
     <>
       <AppShell.Section>

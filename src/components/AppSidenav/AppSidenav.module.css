@@ -15,12 +15,12 @@
   text-transform: capitalize;
 
   @mixin hover {
-    background-color: var(--mantine-primary-color-0);
+    background-color: var(--mantine-primary-color-1);
     transition: all 0.2s ease-in-out;
   }
 
   &[data-active='true'] {
-    background-color: var(--mantine-primary-color-2);
+    background-color: var(--mantine-primary-color-1);
     color: var(--mantine-color-black);
   }
 }
@@ -32,7 +32,7 @@
   text-transform: capitalize;
 
   @mixin hover {
-    background-color: var(--mantine-primary-color-0);
+    background-color: var(--mantine-primary-color-1);
     transition: all 0.2s ease-in-out;
   }
 }

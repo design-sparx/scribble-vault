@@ -1,4 +1,11 @@
-import { ActionIcon, Flex, FlexProps, TextInput } from '@mantine/core';
+import {
+  ActionIcon,
+  ActionIconProps,
+  Flex,
+  FlexProps,
+  TextInput,
+  Tooltip,
+} from '@mantine/core';
 import { Logo } from '@/components/Logo';
 import {
   IconBell,
@@ -7,9 +14,15 @@ import {
   IconSearch,
 } from '@tabler/icons-react';
 import { NavBtn } from '@/components/NavBtn';
-import { useDisclosure } from '@mantine/hooks';
+import classes from './AppHeader.module.css';
 
-const ICON_SIZE = 18;
+const ICON_SIZE = 20;
+
+const ACTION_PROPS: ActionIconProps = {
+  variant: 'subtle',
+  size: 'md',
+  color: 'dark',
+};
 
 type AppHeaderProps = {
   desktopOpened: boolean;
@@ -28,31 +41,64 @@ export const AppHeader = (props: AppHeaderProps) => {
   } = props;
 
   return (
-    <Flex h="100%" px="md" align="center" {...others}>
-      <Logo />
-      <ActionIcon onClick={toggleDesktop} visibleFrom="sm">
-        {desktopOpened ? (
-          <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
-        ) : (
-          <IconLayoutSidebarRightCollapse size={ICON_SIZE} />
-        )}
-      </ActionIcon>
-      <ActionIcon onClick={toggleMobile} hiddenFrom="sm">
-        {mobileOpened ? (
-          <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
-        ) : (
-          <IconLayoutSidebarRightCollapse size={ICON_SIZE} />
-        )}
-      </ActionIcon>
-      <NavBtn action="back" asIcon />
-      <NavBtn action="forward" asIcon />
-      <TextInput
-        leftSection={<IconSearch size={ICON_SIZE} />}
-        placeholder="search"
-      />
-      <ActionIcon>
-        <IconBell size={ICON_SIZE} />
-      </ActionIcon>
+    <Flex
+      h="100%"
+      px="md"
+      align="center"
+      justify="space-between"
+      className={classes.root}
+      {...others}
+    >
+      <Flex gap="xs" align="center">
+        <Tooltip label="collapse sidebar">
+          <ActionIcon
+            onClick={toggleDesktop}
+            visibleFrom="sm"
+            {...ACTION_PROPS}
+          >
+            {desktopOpened ? (
+              <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
+            ) : (
+              <IconLayoutSidebarRightCollapse size={ICON_SIZE} />
+            )}
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip label="collapse sidebar">
+          <ActionIcon onClick={toggleMobile} hiddenFrom="sm" {...ACTION_PROPS}>
+            {mobileOpened ? (
+              <IconLayoutSidebarLeftCollapse size={ICON_SIZE} />
+            ) : (
+              <IconLayoutSidebarRightCollapse size={ICON_SIZE} />
+            )}
+          </ActionIcon>
+        </Tooltip>
+        <Logo />
+      </Flex>
+      <Flex gap="xs" align="center">
+        <NavBtn
+          action="back"
+          asIcon
+          iconSize={ICON_SIZE}
+          actionProps={ACTION_PROPS}
+        />
+        <NavBtn
+          action="forward"
+          asIcon
+          iconSize={ICON_SIZE}
+          actionProps={ACTION_PROPS}
+        />
+        <TextInput
+          leftSection={<IconSearch size={16} />}
+          placeholder="search"
+          size="sm"
+          w={500}
+        />
+      </Flex>
+      <Tooltip label="Notifications">
+        <ActionIcon {...ACTION_PROPS}>
+          <IconBell size={ICON_SIZE} />
+        </ActionIcon>
+      </Tooltip>
     </Flex>
   );
 };

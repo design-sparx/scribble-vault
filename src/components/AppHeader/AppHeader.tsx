@@ -91,7 +91,7 @@ export const AppHeader = (props: AppHeaderProps) => {
           leftSection={<IconSearch size={16} />}
           placeholder="search"
           size="sm"
-          w={500}
+          w={600}
         />
       </Flex>
       <Tooltip label="Notifications">

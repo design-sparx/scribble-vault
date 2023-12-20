@@ -64,8 +64,13 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
 
   return (
     <>
-      <AppShell.Section>
-        <UserButton user={userData} error={userError} loading={userLoading} />
+      <AppShell.Section mb="sm">
+        <UserButton
+          user={userData}
+          error={userError}
+          loading={userLoading}
+          wIcon
+        />
       </AppShell.Section>
       <NavLink
         label="Add page"

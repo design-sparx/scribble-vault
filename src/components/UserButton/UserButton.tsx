@@ -29,9 +29,11 @@ type UserButtonProps = {
 export const UserButton = (props: UserButtonProps) => {
   const { user, loading, error, wIcon, wEmail, ...others } = props;
 
-  return error ? (
-    <ErrorAlert title="Error loading user" message={error.toString()} />
-  ) : (
+  if (error) {
+    return <ErrorAlert title="Error loading user" message={error.toString()} />;
+  }
+
+  return (
     <Menu>
       <Menu.Target>
         <Skeleton visible={loading}>

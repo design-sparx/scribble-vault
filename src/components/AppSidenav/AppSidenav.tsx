@@ -4,6 +4,7 @@ import {
   AppShell,
   AppShellSectionProps,
   Avatar,
+  Divider,
   NavLink,
   ScrollArea,
   Skeleton,
@@ -62,7 +63,7 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
 
   return (
     <>
-      <AppShell.Section mb="sm">
+      <AppShell.Section mb="xs">
         <UserButton
           user={userData}
           error={userError}
@@ -70,6 +71,7 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
           wIcon
         />
       </AppShell.Section>
+      <Divider mb="xs" />
       <NavLink
         label="Add page"
         leftSection={<IconSquareRoundedPlusFilled size={ICON_SIZE} />}

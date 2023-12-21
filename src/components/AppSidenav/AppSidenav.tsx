@@ -6,16 +6,13 @@ import {
   Avatar,
   NavLink,
   ScrollArea,
+  Skeleton,
   Text,
 } from '@mantine/core';
 import { UserButton } from '@/components/UserButton';
 import { PATH_PAGE } from '@/constants/routes';
 import {
-  IconCircleFilled,
-  IconCirclePlus,
-  IconCirclePlus2,
   IconPackageImport,
-  IconPlus,
   IconRoute,
   IconSquareRoundedPlusFilled,
   IconTemplate,
@@ -26,6 +23,7 @@ import classes from './AppSidenav.module.css';
 import _ from 'lodash';
 import { IPage, IWorkspace } from '@/types';
 import { usePathname } from 'next/navigation';
+import { ErrorAlert } from '../ErrorAlert';
 
 const ICON_SIZE = 18;
 
@@ -80,73 +78,94 @@ export const AppSidenav = ({ ...others }: AppSidenavProps) => {
         active={PATH_PAGE.new === pathname}
       />
       <AppShell.Section grow component={ScrollArea}>
-        <AppShell.Section mb="md">
-          <Text tt="capitalize" size="md" py="sm" fw={700}>
-            Workspaces
-          </Text>
-          {navWorkspaces?.map((navWorkspace) => (
-            <NavLink
-              key={navWorkspace.workspace?.id}
-              label={navWorkspace.workspace?.name}
-              leftSection={
-                <Avatar src={navWorkspace.workspace?.icon} size={ICON_SIZE} />
-              }
-              active={
-                navWorkspace.workspace?.id ===
-                _.find(navWorkspace.pages, [
-                  'id',
-                  pathname.split('/')[pathname.split('/').length - 1],
-                ])?.workspace_id
-              }
-              className={classes.linkHeader}
-              classNames={{
-                root: classes.link,
-                children: classes.linkChildren,
-              }}
-              childrenOffset={0}
-            >
-              {navWorkspace.pages?.slice(0, 5)?.map((navPage) => (
+        {workspacesError && (
+          <ErrorAlert
+            title="Error loading workspaces"
+            message={workspacesError.toString()}
+          />
+        )}
+        {workspacesLoading &&
+          Array(10)
+            .fill(0)
+            .map((_, index) => (
+              <Skeleton key={index} h={28} mt="sm" animate={true} />
+            ))}
+        {!workspacesLoading && (
+          <>
+            <AppShell.Section mb="md">
+              <Text tt="capitalize" size="md" py="sm" fw={700}>
+                Workspaces
+              </Text>
+              {navWorkspaces?.map((navWorkspace) => (
                 <NavLink
-                  key={navPage.id}
-                  label={
-                    <Text lineClamp={1} size="sm">
-                      {navPage.name}
-                    </Text>
+                  key={navWorkspace.workspace?.id}
+                  label={navWorkspace.workspace?.name}
+                  leftSection={
+                    <Avatar
+                      src={navWorkspace.workspace?.icon}
+                      size={ICON_SIZE}
+                    />
                   }
-                  leftSection={<Avatar src={navPage.icon} size={ICON_SIZE} />}
-                  href={PATH_PAGE.details(navPage.id)}
-                  className={classes.link}
-                  active={PATH_PAGE.details(navPage.id) === pathname}
-                />
+                  active={
+                    navWorkspace.workspace?.id ===
+                    _.find(navWorkspace.pages, [
+                      'id',
+                      pathname.split('/')[pathname.split('/').length - 1],
+                    ])?.workspace_id
+                  }
+                  className={classes.linkHeader}
+                  classNames={{
+                    root: classes.link,
+                    children: classes.linkChildren,
+                  }}
+                  childrenOffset={0}
+                >
+                  {navWorkspace.pages?.slice(0, 5)?.map((navPage) => (
+                    <NavLink
+                      key={navPage.id}
+                      label={
+                        <Text lineClamp={1} size="sm">
+                          {navPage.name}
+                        </Text>
+                      }
+                      leftSection={
+                        <Avatar src={navPage.icon} size={ICON_SIZE} />
+                      }
+                      href={PATH_PAGE.details(navPage.id)}
+                      className={classes.link}
+                      active={PATH_PAGE.details(navPage.id) === pathname}
+                    />
+                  ))}
+                </NavLink>
               ))}
-            </NavLink>
-          ))}
-        </AppShell.Section>
-        <AppShell.Section>
-          <Text tt="capitalize" size="md" py="sm" fw={700}>
-            Quick actions
-          </Text>
-          <NavLink
-            label="Templates"
-            leftSection={<IconTemplate size={ICON_SIZE} />}
-            className={classes.link}
-          />
-          <NavLink
-            label="Import"
-            leftSection={<IconPackageImport size={ICON_SIZE} />}
-            className={classes.link}
-          />
-          <NavLink
-            label="Updates"
-            leftSection={<IconRoute size={ICON_SIZE} />}
-            className={classes.link}
-          />
-          <NavLink
-            label="Trash"
-            leftSection={<IconTrash size={ICON_SIZE} />}
-            className={classes.link}
-          />
-        </AppShell.Section>
+            </AppShell.Section>
+            <AppShell.Section>
+              <Text tt="capitalize" size="md" py="sm" fw={700}>
+                Quick actions
+              </Text>
+              <NavLink
+                label="Templates"
+                leftSection={<IconTemplate size={ICON_SIZE} />}
+                className={classes.link}
+              />
+              <NavLink
+                label="Import"
+                leftSection={<IconPackageImport size={ICON_SIZE} />}
+                className={classes.link}
+              />
+              <NavLink
+                label="Updates"
+                leftSection={<IconRoute size={ICON_SIZE} />}
+                className={classes.link}
+              />
+              <NavLink
+                label="Trash"
+                leftSection={<IconTrash size={ICON_SIZE} />}
+                className={classes.link}
+              />
+            </AppShell.Section>
+          </>
+        )}
       </AppShell.Section>
     </>
   );

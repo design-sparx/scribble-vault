@@ -10,6 +10,7 @@ import {
   lighten,
   Paper,
   PaperProps,
+  Skeleton,
   Stack,
   Text,
 } from '@mantine/core';
@@ -20,6 +21,7 @@ import { DateTimePicker } from '@mantine/dates';
 
 import classes from './page.module.css';
 import dayjs from 'dayjs';
+import { ErrorAlert } from '@/components/ErrorAlert';
 
 export default function PageDetailsPage({
   params,
@@ -42,6 +44,22 @@ export default function PageDetailsPage({
         : lighten(parsedColor, 0.6),
     },
   };
+
+  if (pageLoading) {
+    return (
+      <Stack my="md">
+        <Skeleton h={32} />
+        <Skeleton h={200} />
+        <Skeleton h={28} />
+      </Stack>
+    );
+  }
+
+  if (pageError) {
+    return (
+      <ErrorAlert title="Error loading page" message={pageError?.toString()} />
+    );
+  }
 
   return (
     <>

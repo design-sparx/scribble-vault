@@ -7,6 +7,7 @@ import {
   Flex,
   Group,
   Image,
+  Loader,
   Menu,
   Paper,
   PaperProps,
@@ -19,7 +20,6 @@ import {
   IconDots,
   IconEdit,
   IconFileExport,
-  IconLayout,
   IconMessagePlus,
   IconPackageImport,
   IconUsersPlus,
@@ -29,6 +29,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { AddCommentModal } from '@/components/AddCommentModal';
 import { ChangeViewPopover } from '@/components/ChangeViewPopover';
 import { EditWorkspaceModal } from '@/components/EditWorkspaceModal';
+import { ErrorAlert } from '@/components/ErrorAlert';
 
 const { Target, Dropdown, Item, Divider } = Menu;
 
@@ -60,6 +61,23 @@ export default function PageLayout({
     shadow: 'sm',
     withBorder: true,
   };
+
+  if (workspaceLoading) {
+    return (
+      <Paper {...PAPER_PROPS}>
+        <Loader />
+      </Paper>
+    );
+  }
+
+  if (workspaceError) {
+    return (
+      <ErrorAlert
+        title="Error loading workspace"
+        message={workspaceError?.toString()}
+      />
+    );
+  }
 
   return (
     <section>

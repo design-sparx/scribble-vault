@@ -1,15 +1,14 @@
 import {
-  UnstyledButton,
-  Group,
   Avatar,
-  Text,
-  rem,
+  Group,
   Menu,
+  Skeleton,
+  Text,
+  UnstyledButton,
   UnstyledButtonProps,
 } from '@mantine/core';
 import {
   IconChevronDown,
-  IconChevronRight,
   IconLogout,
   IconMessageStar,
   IconRefresh,
@@ -17,6 +16,7 @@ import {
 } from '@tabler/icons-react';
 import { IUser } from '@/types';
 import classes from './UserButton.module.css';
+import { ErrorAlert } from '@/components/ErrorAlert';
 
 type UserButtonProps = {
   loading: boolean;
@@ -29,28 +29,32 @@ type UserButtonProps = {
 export const UserButton = (props: UserButtonProps) => {
   const { user, loading, error, wIcon, wEmail, ...others } = props;
 
-  return (
+  return error ? (
+    <ErrorAlert title="Error loading user" message={error.toString()} />
+  ) : (
     <Menu>
       <Menu.Target>
-        <UnstyledButton className={classes.user} {...others}>
-          <Group>
-            <Avatar src={user?.avatar} radius="xl" />
+        <Skeleton visible={loading}>
+          <UnstyledButton className={classes.user} {...others}>
+            <Group>
+              <Avatar src={user?.avatar} radius="xl" />
 
-            <div style={{ flex: 1 }}>
-              <Text size="sm" fw={500}>
-                {user?.name}
-              </Text>
-
-              {wEmail && (
-                <Text c="dimmed" size="xs">
-                  {user?.email}
+              <div style={{ flex: 1 }}>
+                <Text size="sm" fw={500}>
+                  {user?.name}
                 </Text>
-              )}
-            </div>
 
-            {wIcon && <IconChevronDown size={18} />}
-          </Group>
-        </UnstyledButton>
+                {wEmail && (
+                  <Text c="dimmed" size="xs">
+                    {user?.email}
+                  </Text>
+                )}
+              </div>
+
+              {wIcon && <IconChevronDown size={18} />}
+            </Group>
+          </UnstyledButton>
+        </Skeleton>
       </Menu.Target>
       <Menu.Dropdown>
         <Menu.Item leftSection={<IconSettings size={18} />}>Settings</Menu.Item>

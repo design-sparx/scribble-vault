@@ -2,7 +2,6 @@
 import { usePageDetails, useWorkspaces } from '@/hooks';
 import {
   ActionIcon,
-  Avatar,
   Breadcrumbs,
   Button,
   ButtonProps,
@@ -12,6 +11,7 @@ import {
   Image,
   isLightColor,
   lighten,
+  Loader,
   Menu,
   Paper,
   PaperProps,
@@ -19,16 +19,10 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import {
-  IconArchive,
   IconChevronRight,
-  IconDoorExit,
   IconDots,
-  IconDotsVertical,
   IconEdit,
-  IconFileExport,
   IconMessagePlus,
-  IconPackageImport,
-  IconSelector,
   IconTrash,
   IconUsersPlus,
 } from '@tabler/icons-react';
@@ -43,6 +37,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { ShareModal } from '@/components/ShareModal';
 import { AddCommentModal } from '@/components/AddCommentModal';
 import { EditWorkspaceModal } from '@/components/EditWorkspaceModal';
+import { ErrorAlert } from '@/components/ErrorAlert';
 
 const { Target, Dropdown, Item, Divider } = Menu;
 
@@ -98,9 +93,7 @@ export default function PageLayout({
     >
       <Flex gap="xs" align="center">
         <Image src={item.icon} alt={item.title} h={18} w={18} />
-        <Text fz="md" tt="capitalize">
-          {item.title}
-        </Text>
+        <Text fz="md">{item.title}</Text>
       </Flex>
     </UnstyledButton>
   ));
@@ -110,6 +103,20 @@ export default function PageLayout({
 
     setWorkspace(d);
   }, [pageData?.workspace_id, workspacesData]);
+
+  if (pageLoading) {
+    return (
+      <Paper {...PAPER_PROPS}>
+        <Loader />
+      </Paper>
+    );
+  }
+
+  if (pageError) {
+    return (
+      <ErrorAlert title="Error loading page" message={pageError?.toString()} />
+    );
+  }
 
   return (
     <section>

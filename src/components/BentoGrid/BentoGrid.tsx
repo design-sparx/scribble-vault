@@ -38,16 +38,11 @@ export const BentoGrid = ({ pages, loading }: BentoGridProps) => {
           )}
           {getChild(
             getSubHeight(2, px(theme.spacing.md) as number),
-            pages[0]!,
+            pages[1]!,
             loading
           )}
         </Stack>
         <Stack>
-          {getChild(
-            getSubHeight(3, px(theme.spacing.md) as number),
-            pages[1]!,
-            loading
-          )}
           {getChild(
             getSubHeight(3, px(theme.spacing.md) as number),
             pages[2]!,
@@ -58,33 +53,38 @@ export const BentoGrid = ({ pages, loading }: BentoGridProps) => {
             pages[3]!,
             loading
           )}
-        </Stack>
-        <Stack>
-          {getChild(
-            getSubHeight(3, px(theme.spacing.md) as number),
-            pages[3]!,
-            loading
-          )}
           {getChild(
             getSubHeight(3, px(theme.spacing.md) as number),
             pages[4]!,
             loading
           )}
+        </Stack>
+        <Stack>
           {getChild(
             getSubHeight(3, px(theme.spacing.md) as number),
             pages[5]!,
+            loading
+          )}
+          {getChild(
+            getSubHeight(3, px(theme.spacing.md) as number),
+            pages[6]!,
+            loading
+          )}
+          {getChild(
+            getSubHeight(3, px(theme.spacing.md) as number),
+            pages[7]!,
             loading
           )}
         </Stack>
         <Stack>
           {getChild(
             getSubHeight(2, px(theme.spacing.md) as number),
-            pages[6]!,
+            pages[8]!,
             loading
           )}
           {getChild(
             getSubHeight(2, px(theme.spacing.md) as number),
-            pages[6]!,
+            pages[9]!,
             loading
           )}
         </Stack>

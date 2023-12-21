@@ -1,3 +1,5 @@
+# Scribble Vauit
+
 ![image](https://github.com/design-sparx/scribble-vault/assets/26582923/4c215c00-500b-4137-ab06-cc671703a5f2)
 
 ## About

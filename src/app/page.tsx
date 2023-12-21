@@ -1,18 +1,19 @@
 'use client';
 import {
   Box,
-  Flex,
-  Loader,
+  Button,
+  Center,
   SimpleGrid,
+  Skeleton,
   Text,
   Title,
-  Skeleton,
 } from '@mantine/core';
 import { usePaginatePages } from '@/hooks';
 import { BentoGrid } from '@/components/BentoGrid/BentoGrid';
 import { PagesCard } from '@/components/PagesCard';
 import { Empty } from '@/components/Empty';
 import { ErrorAlert } from '@/components/ErrorAlert';
+import { IconChevronDown } from '@tabler/icons-react';
 
 export default function Home() {
   const { size, setSize, isReachingEnd, pages, isLoadingMore, error } =
@@ -61,19 +62,19 @@ export default function Home() {
           >
             {pages?.map((page) => <PagesCard key={page.id} note={page} />)}
           </SimpleGrid>
-          <Flex>
-            <button
-              disabled={isLoadingMore || isReachingEnd}
+          <Center py="md">
+            <Button
+              loading={isLoadingMore || isReachingEnd}
               onClick={() => setSize(size + 1)}
+              rightSection={<IconChevronDown size={18} />}
             >
               {isLoadingMore
                 ? 'Loading...'
                 : isReachingEnd
                   ? 'No more posts'
                   : 'Load more'}
-            </button>
-            <Text>{size}</Text>
-          </Flex>
+            </Button>
+          </Center>
         </>
       ) : (
         <Empty />

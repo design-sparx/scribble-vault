@@ -4,12 +4,12 @@ import { PagesCard } from '@/components/PagesCard';
 import {
   Box,
   Button,
-  Flex,
+  Center,
   SimpleGrid,
   Skeleton,
   Stack,
-  Text,
 } from '@mantine/core';
+import { IconChevronDown } from '@tabler/icons-react';
 
 export default function WorkspaceDetails({
   params,
@@ -46,10 +46,11 @@ export default function WorkspaceDetails({
       >
         {pages?.map((page) => <PagesCard key={page.id} note={page} />)}
       </SimpleGrid>
-      <Flex>
+      <Center py="md">
         <Button
           loading={isLoadingMore || isReachingEnd}
           onClick={() => setSize(size + 1)}
+          rightSection={<IconChevronDown size={18} />}
         >
           {isLoadingMore
             ? 'Loading...'
@@ -57,8 +58,7 @@ export default function WorkspaceDetails({
               ? 'No more posts'
               : 'Load more'}
         </Button>
-        <Text>{size}</Text>
-      </Flex>
+      </Center>
     </Box>
   );
 }

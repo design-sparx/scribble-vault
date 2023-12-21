@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About
 
-## Getting Started
+A note keeping web application template using Mantine 7, Next 14 (App), Tiptap WSIWYG rich text editor and JSON server.
 
-First, run the development server:
+> Kindly note: primarily this template is geared to be used with a backend or content management service and because of that I have
+> added **json-serve** and a **db.json** on the root directory.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Quick start
+
+#### Download
+
+- Clone this repo git clone `https://github.com/design-sparx/mantine-analytics-dashboard.git`
+- [Download from GitHub](https://github.com/design-sparx/mantine-analytics-dashboard/archive/refs/heads/main.zip)
+
+#### Environment variables
+
+Before installing, in your project root directory, create an `env.local` file and paste the below.
+
+```bash copy
+NEXT_PUBLIC_BASEURL=http://localhost:8000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Note: The above variable will be used to consume your json server endpoints.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Dev tools
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+You'll need to install Node.js.
+Once Node.js is installed, run npm install to install the rest of the template's dependencies. All dependencies will be
+downloaded to the node_modules directory.
 
-## Learn More
+```bash copy
+yarn install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Before running your Nextjs server, you will need to run your json server. This will server your local webserver
+at http://localhost:8000, using the following command.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash copy
+yarn json:serve
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Now you're ready to modify the source files and generate new files. To automatically detect file changes and start a
+local webserver at http://localhost:3000, run the following command.
 
-## Deploy on Vercel
+```bash copy
+yarn dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Compile, optimize, minify and uglify all source files to build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash copy
+yarn build
+```

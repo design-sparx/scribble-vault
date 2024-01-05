@@ -14,8 +14,8 @@ A note keeping web application template using [Mantine](https://mantine.dev/), [
 
 #### Download
 
-- Clone this repo git clone `https://github.com/design-sparx/mantine-analytics-dashboard.git`
-- [Download from GitHub](https://github.com/design-sparx/mantine-analytics-dashboard/archive/refs/heads/main.zip)
+- Clone this repo git clone `https://github.com/design-sparx/scribble-vault.git`
+- [Download from GitHub](https://github.com/design-sparx/scribble-vault/archive/refs/heads/master.zip)
 
 #### Environment variables
 
